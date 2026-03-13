@@ -11,7 +11,7 @@ CITADEL aide les vibe coders sérieux à construire avec de la structure, de la 
 npx citadel-ai init
 ```
 
-Fonctionne avec **Claude Code** · **Cursor** · **Antigravity** · **Windsurf**
+Fonctionne avec **Codex** · **Claude Code** · **Cursor** · **Antigravity** · **Windsurf**
 
 ---
 
@@ -100,11 +100,11 @@ Décisions, erreurs et contexte persistent dans `.citadel/memory/`. La session s
 
 ### Option 1 : Copie-colle dans ton chat IA (le plus simple)
 
-Ouvre ton IDE IA (Cursor, Antigravity, Claude Code, Windsurf) et colle ça :
+Ouvre ton IDE IA (Codex, Cursor, Antigravity, Claude Code, Windsurf) et colle ça :
 
 ```
 Lance cette commande dans le terminal : npx citadel-ai init
-Puis lis le fichier CLAUDE.md ou GEMINI.md qui a été créé et suis ses instructions.
+Puis lis le fichier AGENTS.md, CLAUDE.md ou GEMINI.md qui a été créé et suis ses instructions.
 ```
 
 Ton IA fait le reste. Décris ce que tu veux construire.
@@ -129,6 +129,7 @@ Voir [GETTING-STARTED.md](GETTING-STARTED.md) — un guide pas-à-pas sans aucun
 
 ```
 ton-projet/
+├── AGENTS.md              ← Chargé auto par Codex
 ├── CLAUDE.md              ← Chargé auto par Claude Code
 ├── GEMINI.md              ← Chargé auto par Antigravity
 ├── .cursorrules           ← Chargé auto par Cursor
@@ -137,7 +138,7 @@ ton-projet/
 ├── .cursor/commands/
 ├── .citadel/
 │   ├── agents/            ← 42 personas d'agents complètes (référence)
-│   ├── teams/             ← 10 fichiers équipe (chargement par phase)
+│   ├── teams/             ← 12 fichiers équipe et pods de delivery (chargement par phase)
 │   ├── specs/             ← PRD, ADR, Sécurité, Data Model, Growth
 │   ├── memory/            ← État persistant (gitignored)
 │   └── gates/             ← Suivi des gates (gitignored)
@@ -149,6 +150,7 @@ Tout est installé. L'IDE ne lit que ce qui est contextuel.
 |-----|-----------------|
 | Claude Code | `/citadel-help` |
 | Cursor | `/citadel-help` |
+| Codex | Commence à chatter (`AGENTS.md` est chargé) |
 | Antigravity | Commence à chatter |
 | Windsurf | Commence à chatter |
 

@@ -17,7 +17,7 @@ Done. Open your IDE and type `/citadel-help` or just start chatting.
 
 **Step 1: Open your AI IDE**
 
-Open Cursor, Antigravity, Claude Code, or Windsurf — whichever you use to vibecode.
+Open Codex, Cursor, Antigravity, Claude Code, or Windsurf — whichever you use to vibecode.
 
 **Step 2: Open or create your project folder**
 
@@ -51,9 +51,10 @@ You'll see something like:
 ```
 ✅ CITADEL installed! 42 agents ready.
 
+  AGENTS.md   Codex rules (lean, phased loading)
   .citadel/
   ├── agents/  42 full agent personas (reference)
-  ├── teams/   10 team files (loaded per phase by IDE)
+  ├── teams/   12 team files and delivery pods (loaded per phase by IDE)
   ├── specs/   PRD, ADR, Security, Data Model, Growth
   ├── memory/  Session state (gitignored)
   └── gates/   Gate progress (gitignored)
@@ -74,7 +75,7 @@ Copy-paste this message into your AI chat:
 ```
 I want to set up CITADEL in this project. 
 Please run this command in the terminal: npx citadel-ai init
-Then read the CLAUDE.md (or GEMINI.md) file that was created and follow its instructions.
+Then read the AGENTS.md, CLAUDE.md, or GEMINI.md file that was created and follow its instructions.
 ```
 
 Your AI IDE will run the command for you and set everything up.
@@ -113,13 +114,13 @@ Not for IDE usage. Your IDE already has its own AI. CITADEL just gives it struct
 The API key is only needed if you want to use the CLI (`npx citadel-ai run`), which most people don't need.
 
 **Does this work with [my IDE]?**
-If your IDE reads project files for context (most AI IDEs do), yes. CITADEL creates rule files for Claude Code, Cursor, Antigravity, and Windsurf automatically.
+If your IDE reads project files for context (most AI IDEs do), yes. CITADEL creates rule files for Codex, Claude Code, Cursor, Antigravity, and Windsurf automatically.
 
 **Can I use this with an existing project?**
 Yes. Run `npx citadel-ai init` in your project folder. It won't modify your existing code — it only adds CITADEL files.
 
 **What if I want to remove CITADEL?**
-Delete the `.citadel/` folder and the rule files (CLAUDE.md, GEMINI.md, .cursorrules, .windsurfrules). Your project code is untouched.
+Delete the `.citadel/` folder and the rule files (AGENTS.md, CLAUDE.md, GEMINI.md, .cursorrules, .windsurfrules). Your project code is untouched.
 
 **Is this free?**
 Yes. MIT license. Free forever.

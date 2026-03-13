@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+export const SKILL_FILE_COUNT = 11;
 export function writeSkills(citadelPath) {
     const d = join(citadelPath, 'skills');
     mkdirSync(d, { recursive: true });
@@ -12,6 +13,18 @@ export function writeSkills(citadelPath) {
     // Target: < 800 tokens
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'rules_essential.md'), `# Essential Rules (P0 — Always Active)
+
+## Progressive Disclosure
+- Read the Section Index first.
+- Jump only to the sections needed for the task at hand.
+- Do not read the full file if one section is enough.
+
+## Section Index
+- Architecture
+- Code Quality
+- Security
+- Testing
+- Before Writing Code
 
 ## Architecture
 - Business logic in service layer ONLY. Never in controllers, routes, or DB layer.
@@ -47,6 +60,18 @@ export function writeSkills(citadelPath) {
     // BACKEND SKILLS — loaded when building backend
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_backend.md'), `# Backend Engineering Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- Read only the sections that match the current backend change.
+- If the task is only about auth, errors, or DB, do not load the rest.
+
+## Section Index
+- API Design
+- Service Layer Pattern
+- Error Handling
+- Database
+- Async and Performance
 
 ## API Design
 - RESTful: proper HTTP methods (GET=read, POST=create, PUT=replace, PATCH=update, DELETE=delete).
@@ -87,6 +112,18 @@ controller (HTTP) → service (business logic) → repository (data access) → 
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_frontend.md'), `# Frontend Engineering Skills
 
+## Progressive Disclosure
+- Start with the Section Index.
+- Load only the sections relevant to the current UI task.
+- For pure responsiveness or forms work, do not reread the whole file.
+
+## Section Index
+- Components
+- State Management
+- Performance
+- Forms
+- Mobile and Responsive
+
 ## Components
 - Max 150 lines per component. Split smart (logic) vs dumb (display).
 - State flows down (props). Events flow up (callbacks). No prop drilling > 2 levels.
@@ -122,6 +159,18 @@ controller (HTTP) → service (business logic) → repository (data access) → 
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_uiux.md'), `# UI/UX Skills
 
+## Progressive Disclosure
+- Start with the Section Index.
+- Read only the design sections that match the current decision.
+- Use this file for interaction and UX structure, not for unrelated implementation detail.
+
+## Section Index
+- Design Principles
+- Layout
+- Colors and Typography
+- Interaction
+- Mobile PWA
+
 ## Design Principles (Dieter Rams — Less but Better)
 - Remove until only the essential remains. If it doesn't serve the user's intent, delete it.
 - Max 3 primary actions per screen. One should be obviously the main one.
@@ -153,9 +202,179 @@ controller (HTTP) → service (business logic) → repository (data access) → 
 - Offline: show cached data + "You're offline" banner. Don't blank the screen.
 `, 'utf-8');
     // ══════════════════════════════════════════
+    // VISUAL DESIGN SKILLS — loaded for UI direction and polish
+    // ══════════════════════════════════════════
+    writeFileSync(join(d, 'skills_visual_design.md'), `# Visual Design Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- If the task is only typography, color, motion, or layout, jump directly there.
+- Use this file to sharpen visual direction, not to replace functional UX review.
+
+## Section Index
+- Art Direction
+- Typography
+- Color
+- Layout and Composition
+- Motion and States
+
+## Art Direction
+- Start every UI task with 3 adjectives for the intended feel (for example: "calm, premium, fast").
+- One product = one visual thesis. Avoid generic "default SaaS" styling with random gradients or copy-pasted cards.
+- Use contrast with intent: large/small, dense/airy, quiet/loud. Not everything can be emphasized at once.
+
+## Typography
+- Choose a type pairing on purpose. One display face plus one body face is enough.
+- Establish a type scale before designing components. Reuse it everywhere.
+- Headings should look designed, not just bigger. Tune letter-spacing, line-height, and weight.
+- Body text should remain easy to scan at mobile widths. Target 45-75 characters per line.
+
+## Color
+- Define a restrained palette: foundation neutrals, one primary accent, one support accent, semantic colors.
+- Use accent colors sparingly. If everything is highlighted, nothing is highlighted.
+- Surfaces should have depth: layered backgrounds, borders, shadows, texture, or subtle tonal shifts.
+- Contrast is a design tool and an accessibility requirement. Text must meet WCAG AA minimum.
+
+## Layout and Composition
+- Use a deliberate spacing scale. Repeated spacing values should come from tokens, not guesswork.
+- Build clear focal points: what should the eye see first, second, third.
+- Mix stable structure with one memorable element: a strong hero, card treatment, illustration, or motion pattern.
+- Empty space is allowed. Crowded screens feel cheaper and harder to trust.
+
+## Motion and States
+- Motion should explain changes in state, not decorate them.
+- Prefer 150-250ms transitions for UI feedback. Longer only when a scene change needs emphasis.
+- Hover, focus, active, disabled, loading, empty, and error states must feel part of the same system.
+- Respect reduced motion preferences and keep motion optional for core usability.
+`, 'utf-8');
+    // ══════════════════════════════════════════
+    // DESIGN SYSTEM SKILLS — loaded when design tokens/components matter
+    // ══════════════════════════════════════════
+    writeFileSync(join(d, 'skills_design_system.md'), `# Design System Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- If the task is only tokens, variants, or state coverage, read that section only.
+- Do not load this whole skill for a one-line CSS tweak unless system rules are affected.
+
+## Section Index
+- Tokens First
+- Component Contracts
+- State Coverage
+- System Hygiene
+
+## Tokens First
+- Tokenize color, spacing, typography, radius, shadow, border, and motion values before scaling components.
+- Token names should describe intent: \`color.surface.raised\`, \`space.300\`, \`radius.lg\`.
+- Components may consume tokens. They must not invent one-off values without justification.
+
+## Component Contracts
+- Every component defines: purpose, props, variants, states, accessibility contract, and responsive behavior.
+- Variants must be explicit. Avoid boolean prop soup like \`primary secondary subtle compact\`.
+- Shared primitives come first: button, input, card, badge, modal, empty state, section header.
+- If three screens need the same pattern, promote it to a reusable component.
+
+## State Coverage
+- Each component documents default, hover, focus, active, disabled, loading, success, warning, and error when relevant.
+- Empty states and skeletons are part of the system, not last-minute add-ons.
+- Interactive components must expose visible focus styles and proper disabled semantics.
+
+## System Hygiene
+- Keep a single source of truth for tokens and component examples.
+- When changing a token, review all impacted components before shipping.
+- Prefer composition over inheritance. Small primitives assembled intentionally age better.
+- The design system should reduce decisions during implementation, not add ceremony.
+`, 'utf-8');
+    // ══════════════════════════════════════════
+    // IMPLEMENTATION PLAN SKILLS — loaded before makers start coding
+    // ══════════════════════════════════════════
+    writeFileSync(join(d, 'skills_implementation_plan.md'), `# Implementation Plan Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- Read the plan structure first, then only the approval or format sections you need.
+- This file is for planning and coordination, not for low-level coding detail.
+
+## Section Index
+- Before Any Code
+- Minimum Plan Format
+- Approval Rules
+
+## Before Any Code
+- The CTO writes an implementation plan before makers start.
+- Plan sections: objective, impacted files, data/contracts touched, risks, tests, rollback, open questions.
+- Makers can refine the plan, but they do not skip it.
+
+## Minimum Plan Format
+1. Goal: what changes for the user or system.
+2. Scope: what is in, what is explicitly out.
+3. Touch points: files, services, components, APIs, migrations, jobs.
+4. Invariants: behavior that must not break.
+5. Risks: architecture, UX, security, performance, data integrity.
+6. Verification: tests, manual checks, observability signals.
+7. Rollback: how to recover if the change fails.
+
+## Approval Rules
+- No maker implementation until LINUS has challenged the plan for unnecessary complexity.
+- If the task affects UI, JONY reviews the visual/design implications before DAN codes it.
+- If the task affects auth, data, or external integrations, relevant specialists add risks before implementation starts.
+- The user sees the consolidated plan, not raw internal drafts, unless they explicitly ask for work-in-progress.
+`, 'utf-8');
+    // ══════════════════════════════════════════
+    // CHANGE SAFETY SKILLS — loaded for coherence and regression review
+    // ══════════════════════════════════════════
+    writeFileSync(join(d, 'skills_change_safety.md'), `# Change Safety Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- Read only the review tactics or regression checklist relevant to the change.
+- Use this skill when validating impact, not when ideating features.
+
+## Section Index
+- Coherence Review
+- Regression Checklist
+- Review Tactics
+- Output Format
+
+## Coherence Review
+- Every non-trivial change gets a coherence review before it is presented as done.
+- Coherence review checks architecture fit, contract compatibility, state consistency, and operational impact.
+- "It works locally" is not a coherence verdict.
+
+## Regression Checklist
+- Existing user flows still work.
+- Existing API contracts still match consumers.
+- Existing state transitions still produce valid UI states.
+- Existing auth, permissions, and validation still hold.
+- Logging, monitoring, and analytics remain meaningful after the change.
+
+## Review Tactics
+- Compare before/after behavior for the critical path, not only changed lines.
+- List assumptions explicitly. Hidden assumptions are where regressions hide.
+- Flag partial implementations that create dead ends, broken states, or misleading UX.
+- If a change weakens system coherence, raise a blocking flag and propose the smallest safe correction.
+
+## Output Format
+- Verdict: pass, pass with flags, or fail.
+- Broken invariants: concrete list.
+- Risk level: low, medium, high.
+- Next action: merge, patch specific issue, or redesign approach.
+`, 'utf-8');
+    // ══════════════════════════════════════════
     // DATA SKILLS — loaded when designing data layer
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_data.md'), `# Data Engineering Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- Read only schema, query, migration, or quality sections as needed.
+- A simple query fix does not require reading the whole file.
+
+## Section Index
+- Schema Design
+- Queries
+- Migrations
+- Data Quality
 
 ## Schema Design
 - 3NF minimum. Denormalize only with documented reason (performance, read pattern).
@@ -188,6 +407,17 @@ controller (HTTP) → service (business logic) → repository (data access) → 
     // SECURITY SKILLS — loaded during security review
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_security.md'), `# Security Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- If the task is login or auth, jump directly to Auth Patterns.
+- If the task is headers, logging, or encryption, read only that section plus anything it depends on.
+
+## Section Index
+- OWASP Top 10 Checklist
+- Auth Patterns
+- Data Protection
+- Headers
 
 ## OWASP Top 10 Checklist
 - [ ] Injection: parameterized queries. No string concatenation for SQL.
@@ -229,6 +459,17 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()
     // MOBILE SKILLS — loaded when building mobile/PWA
     // ══════════════════════════════════════════
     writeFileSync(join(d, 'skills_mobile.md'), `# Mobile / PWA Skills
+
+## Progressive Disclosure
+- Start with the Section Index.
+- Read only the sections needed for the current mobile or PWA concern.
+- If the issue is offline sync, do not load the entire performance and touch guidance.
+
+## Section Index
+- Performance
+- Offline-First
+- PWA Requirements
+- Touch and Mobile UX
 
 ## Performance
 - 60fps: measure on mid-range devices. Avoid layout thrashing.

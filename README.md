@@ -11,7 +11,7 @@ CITADEL helps serious vibe coders build with structure, memory, and review — s
 npx citadel-ai init
 ```
 
-Works with **Claude Code** · **Cursor** · **Antigravity** · **Windsurf**
+Works with **Codex** · **Claude Code** · **Cursor** · **Antigravity** · **Windsurf**
 
 ---
 
@@ -100,11 +100,11 @@ Decisions, errors, and context persist in `.citadel/memory/`. Next session picks
 
 ### Option 1: Copy-paste into your AI chat (easiest)
 
-Open your AI IDE (Cursor, Antigravity, Claude Code, Windsurf) and paste this:
+Open your AI IDE (Codex, Cursor, Antigravity, Claude Code, Windsurf) and paste this:
 
 ```
 Run this command in the terminal: npx citadel-ai init
-Then read the CLAUDE.md or GEMINI.md file that was created and follow its instructions.
+Then read the AGENTS.md, CLAUDE.md, or GEMINI.md file that was created and follow its instructions.
 ```
 
 Your AI does the rest. Start describing what you want to build.
@@ -127,6 +127,7 @@ This creates:
 
 ```
 your-project/
+├── AGENTS.md              ← Auto-loaded by Codex
 ├── CLAUDE.md              ← Auto-loaded by Claude Code
 ├── GEMINI.md              ← Auto-loaded by Antigravity
 ├── .cursorrules           ← Auto-loaded by Cursor
@@ -135,7 +136,7 @@ your-project/
 ├── .cursor/commands/
 ├── .citadel/
 │   ├── agents/            ← 42 full agent personas (reference)
-│   ├── teams/             ← 10 team files (phased loading by IDE)
+│   ├── teams/             ← 12 team files and delivery pods (phased loading by IDE)
 │   ├── vault/             ← Live project memory (AI reads + writes)
 │   │   ├── PROGRESS.md        Phase, gates, what's done/next
 │   │   ├── CONTEXT_SNAPSHOT.md Resume point for next session
@@ -154,6 +155,7 @@ Everything is installed. The IDE reads only what's contextual.
 |-----|-------------|
 | Claude Code | `/citadel-help` |
 | Cursor | `/citadel-help` |
+| Codex | Start chatting (`AGENTS.md` is loaded) |
 | Antigravity | Just start chatting |
 | Windsurf | Just start chatting |
 

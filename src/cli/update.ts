@@ -2,8 +2,8 @@ import { existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { AGENT_REGISTRY } from '../agents/registry.js';
 import { getAgentCount } from '../agents/registry.js';
-import { installAllIDEs, writeTeamFiles } from './ide-rules.js';
-import { writeSkills } from './skills.js';
+import { installAllIDEs, TEAM_FILE_COUNT, writeTeamFiles } from './ide-rules.js';
+import { SKILL_FILE_COUNT, writeSkills } from './skills.js';
 import { writeFileSync } from 'node:fs';
 import { banner } from '../ui/terminal.js';
 
@@ -52,15 +52,16 @@ export async function updateCommand(): Promise<void> {
 
   // Update framework files ONLY
   writeAgentPersonas(cp);
-  console.log('  ✅ .citadel/agents/  — 42 agent personas updated');
+  console.log(`  ✅ .citadel/agents/  — ${AGENT_REGISTRY.size} agent personas updated`);
 
   writeTeamFiles(cp);
-  console.log('  ✅ .citadel/teams/   — 10 team files updated');
+  console.log(`  ✅ .citadel/teams/   — ${TEAM_FILE_COUNT} team files updated`);
 
   writeSkills(cp);
-  console.log('  ✅ .citadel/skills/  — 7 engineering standards updated');
+  console.log(`  ✅ .citadel/skills/  — ${SKILL_FILE_COUNT} engineering standards updated`);
 
   installAllIDEs(pp);
+  console.log('  ✅ AGENTS.md         — updated');
   console.log('  ✅ CLAUDE.md         — updated');
   console.log('  ✅ .cursorrules      — updated');
   console.log('  ✅ GEMINI.md         — updated');
@@ -84,12 +85,12 @@ export async function updateCommand(): Promise<void> {
 
   const c = getAgentCount();
   console.log(`
-✅ CITADEL updated to v10.0.0 — ${c.total} agents.
+✅ CITADEL updated to v10.3.0 — ${c.total} agents.
 
   What was updated:
     agents/     → Latest agent personas and rules
     teams/      → Latest team files for phased loading
-    IDE rules   → Latest CLAUDE.md, GEMINI.md, etc.
+    IDE rules   → Latest AGENTS.md, CLAUDE.md, GEMINI.md, etc.
     Commands    → Latest slash commands
 
   What was NOT touched:

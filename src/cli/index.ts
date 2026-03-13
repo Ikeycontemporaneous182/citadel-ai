@@ -64,6 +64,9 @@ After init, you can also use slash commands in your IDE:
   /citadel-build   — Start the maker team
   /citadel-review  — Run the checker team
   /citadel-status  — Phase & gate dashboard
+
+Codex support:
+  AGENTS.md        — Lean Codex instructions with phased loading
 `);
 } else if (cmd === 'version' || cmd === '--version' || cmd === '-v') {
   console.log(`citadel-ai v${CURRENT_VERSION}`);

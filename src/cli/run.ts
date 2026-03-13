@@ -31,7 +31,7 @@ export async function runCommand(): Promise<void> {
     console.log(`   export ANTHROPIC_API_KEY=sk-ant-...`);
     console.log(`   export OPENAI_API_KEY=sk-...\n`);
     console.log(`💡 The interactive CLI needs an API key. For IDE-only usage,`);
-    console.log(`   just open your project in Claude Code, Cursor, or Antigravity.\n`);
+    console.log(`   just open your project in Codex, Claude Code, Cursor, Antigravity, or Windsurf.\n`);
     process.exit(1);
   }
 

@@ -5,8 +5,8 @@ import { Memory } from '../core/memory.js';
 import { GateSystem } from '../core/gates.js';
 import { getAgentCount, AGENT_REGISTRY } from '../agents/registry.js';
 import { banner } from '../ui/terminal.js';
-import { installAllIDEs, writeTeamFiles } from './ide-rules.js';
-import { writeSkills } from './skills.js';
+import { installAllIDEs, TEAM_FILE_COUNT, writeTeamFiles } from './ide-rules.js';
+import { SKILL_FILE_COUNT, writeSkills } from './skills.js';
 
 function ask(q: string): Promise<string> {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -172,6 +172,7 @@ function writeGettingStarted(pp: string): void {
 
 ### Files your IDE reads automatically
 Your AI IDE picks these up without any action from you:
+- \`AGENTS.md\` → Codex reads this on every message
 - \`CLAUDE.md\` → Claude Code reads this on every message
 - \`GEMINI.md\` → Antigravity reads this on every message
 - \`.cursorrules\` → Cursor reads this on every message
@@ -182,7 +183,7 @@ when to ask questions vs when to build, and what standards to enforce.
 
 ### Your project's knowledge base (.citadel/)
 - \`agents/\` — 42 agent personas with full personality, rules, and system prompts
-- \`teams/\` — Same agents grouped by team (loaded per phase to save tokens)
+- \`teams/\` — Team files + delivery pods (loaded per phase to save tokens)
 - \`specs/\` — Templates for PRD, architecture, security, data model, growth
 - \`memory/\` — Session state, decisions, errors (persists across sessions)
 - \`gates/\` — Progress tracking for the 5 quality gates
@@ -197,7 +198,7 @@ when to ask questions vs when to build, and what standards to enforce.
 ## What to do now
 
 ### Step 1: Open your project in your IDE
-Just open this folder in Claude Code, Cursor, Antigravity, or Windsurf.
+Just open this folder in Codex, Claude Code, Cursor, Antigravity, or Windsurf.
 The AI already knows about CITADEL — no configuration needed.
 
 ### Step 2: Describe what you want to build
@@ -232,6 +233,8 @@ Checker agents validate independently. The builder never reviews their own work.
 - Specs are saved in .citadel/specs/ — they persist across sessions
 - If the AI starts building without asking questions first, remind it:
   "Follow CITADEL rules — ask questions before drafting"
+- If the AI starts coding before review, remind it:
+  "Follow CITADEL delivery protocol — implementation plan, checkers, then CTO coherence review"
 
 ## Need help?
 https://github.com/nbabderrahmane/citadel-ai/issues
@@ -289,13 +292,14 @@ export async function initCommand(targetPath?: string): Promise<void> {
 
   const c = getAgentCount();
   console.log(`  ✅ ${c.total} agents installed (.citadel/agents/)
-  ✅ 10 team files for phased loading (.citadel/teams/)
-  ✅ 7 skills files — engineering standards (.citadel/skills/)
+  ✅ ${TEAM_FILE_COUNT} team files for phased loading (.citadel/teams/)
+  ✅ ${SKILL_FILE_COUNT} skills files — engineering standards (.citadel/skills/)
   ✅ Spec templates (.citadel/specs/)
   ✅ Project vault — live memory (.citadel/vault/)
   ✅ Getting started guide (.citadel/GETTING_STARTED.md)
 
   IDE rules (auto-loaded — no config needed):
+  ✅ AGENTS.md         → Codex
   ✅ CLAUDE.md         → Claude Code
   ✅ .cursorrules      → Cursor
   ✅ GEMINI.md         → Antigravity
@@ -313,7 +317,7 @@ ${'═'.repeat(56)}
   ✅ CITADEL is ready. Here's what to do:
 
   1. Open this folder in your IDE
-     (Claude Code, Cursor, Antigravity, or Windsurf)
+     (Codex, Claude Code, Cursor, Antigravity, or Windsurf)
 
   2. The AI already knows the rules — just start talking:
      "I want to build [describe your idea]"
