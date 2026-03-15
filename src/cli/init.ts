@@ -5,36 +5,19 @@ import { Memory } from '../core/memory.js';
 import { GateSystem } from '../core/gates.js';
 import { getAgentCount, AGENT_REGISTRY } from '../agents/registry.js';
 import { banner } from '../ui/terminal.js';
-import { installAllIDEs, TEAM_FILE_COUNT, writeTeamFiles } from './ide-rules.js';
-import { SKILL_FILE_COUNT, writeSkills } from './skills.js';
-import {
-  AGENTS_DIR,
-  GATES_DIR,
-  HUB_FILE_COUNT,
-  HUB_FILES,
-  INTERNAL_DIR,
-  PROJECT_HUB_DIR,
-  PROJECT_SPECS_DIR,
-  SKILLS_DIR,
-  STATE_DIR,
-  TEAMS_DIR,
-} from '../core/project-layout.js';
-
-function writeTextFile(path: string, content: string, overwrite = true): void {
-  if (!overwrite && existsSync(path)) return;
-  writeFileSync(path, content, 'utf-8');
-}
+import { installAllIDEs, writeTeamFiles } from './ide-rules.js';
+import { writeSkills } from './skills.js';
 
 function ask(q: string): Promise<string> {
   const rl = createInterface({ input: process.stdin, output: process.stdout });
   return new Promise(r => { rl.question(q, a => { rl.close(); r(a.trim()); }); });
 }
 
-export function writeAgentPersonas(cp: string): void {
+function writeAgentPersonas(cp: string): void {
   const d = join(cp, 'agents');
   mkdirSync(d, { recursive: true });
   for (const [id, a] of AGENT_REGISTRY) {
-    writeTextFile(join(d, `${id}.md`), [
+    writeFileSync(join(d, `${id}.md`), [
       `# ${a.icon} ${a.name} — ${a.title}`,
       `> ${a.subtitle}`,
       '',
@@ -56,56 +39,52 @@ export function writeAgentPersonas(cp: string): void {
       '',
       `## System Prompt`,
       a.systemPrompt,
-    ].join('\n') + '\n');
+    ].join('\n') + '\n', 'utf-8');
   }
 }
 
-export function writeSpecTemplates(projectPath: string, overwrite = true): void {
-  const d = join(projectPath, PROJECT_SPECS_DIR);
+function writeSpecTemplates(cp: string): void {
+  const d = join(cp, 'specs');
   mkdirSync(d, { recursive: true });
-  writeTextFile(join(d, 'prd.md'), '# Product Requirements Document\n\n## Problem Statement\n<!-- What problem are we solving? -->\n\n## Target Users\n\n## Success Metrics\n\n## User Stories\n<!-- As a [user], I want [action] so that [outcome] -->\n\n## Scope\n### In Scope\n### Out of Scope\n', overwrite);
-  writeTextFile(join(d, 'adr.md'), '# Architecture Decision Records\n\n<!-- ADRs appended by LINUS (CTO) -->\n', overwrite);
-  writeTextFile(join(d, 'implementation-plan.md'), '# Implementation Plan\n\n## Goal\n## Scope\n## Touch Points\n## Invariants\n## Risks\n## Verification\n## Rollback\n## Open Questions\n\n<!-- Owned by LINUS before makers start -->\n', overwrite);
-  writeTextFile(join(d, 'security.md'), '# Security Requirements\n\n## Authentication\n## Authorization\n## Data Protection\n## Compliance\n## Threat Model\n\n<!-- Reviewed by BRUCE (CISO) — ABSOLUTE VETO POWER -->\n', overwrite);
-  writeTextFile(join(d, 'data-model.md'), '# Data Model\n\n## Entities\n## Relationships\n## Indexes\n## Migration Plan\n\n<!-- Designed by CODD, reviewed by DATE -->\n', overwrite);
-  writeTextFile(join(d, 'growth.md'), '# Growth Strategy\n\n## Metrics & KPIs\n## Analytics Plan\n## SEO Strategy\n## Growth Loops\n\n<!-- Owned by SEAN (CGO) -->\n', overwrite);
+  writeFileSync(join(d, 'prd.md'), '# Product Requirements Document\n\n## Problem Statement\n<!-- What problem are we solving? -->\n\n## Target Users\n\n## Success Metrics\n\n## User Stories\n<!-- As a [user], I want [action] so that [outcome] -->\n\n## Scope\n### In Scope\n### Out of Scope\n', 'utf-8');
+  writeFileSync(join(d, 'adr.md'), '# Architecture Decision Records\n\n<!-- ADRs appended by LINUS (CTO) -->\n', 'utf-8');
+  writeFileSync(join(d, 'security.md'), '# Security Requirements\n\n## Authentication\n## Authorization\n## Data Protection\n## Compliance\n## Threat Model\n\n<!-- Reviewed by BRUCE (CISO) — ABSOLUTE VETO POWER -->\n', 'utf-8');
+  writeFileSync(join(d, 'data-model.md'), '# Data Model\n\n## Entities\n## Relationships\n## Indexes\n## Migration Plan\n\n<!-- Designed by CODD, reviewed by DATE -->\n', 'utf-8');
+  writeFileSync(join(d, 'growth.md'), '# Growth Strategy\n\n## Metrics & KPIs\n## Analytics Plan\n## SEO Strategy\n## Growth Loops\n\n<!-- Owned by SEAN (CGO) -->\n', 'utf-8');
 }
 
-export function writeProjectHubTemplates(projectPath: string, overwrite = true): void {
-  const d = join(projectPath, PROJECT_HUB_DIR);
+function writeVaultTemplates(cp: string): void {
+  const d = join(cp, 'vault');
   mkdirSync(d, { recursive: true });
 
-  writeTextFile(join(d, HUB_FILES.status), `# CITADEL Status
+  writeFileSync(join(d, 'PROGRESS.md'), `# Project Progress
 
 ## Current State
 - **Phase:** Inception (Gate 0)
 - **Status:** Fresh project — no work started
-- **Current mode:** Start
+- **Active agents:** None yet
 
-## Token Budget
-- **Budget:** Light
-- **Used:** 0 / 4,000 tokens (0%)
-- **Status:** Healthy
-- **Calls:** 0 | **Last response:** 0 | **Peak:** 0
+## Gates
+| Gate | Status | Notes |
+|------|--------|-------|
+| Gate 0 — Inception | ⬜ Pending | C-Suite needs to ask questions |
+| Gate 1 — Pre-Design | ⬜ Pending | |
+| Gate 2 — Pre-Build | ⬜ Pending | |
+| Gate 3 — Pre-Ship | ⬜ Pending | |
+| Gate 4 — Post-Deploy | ⬜ Pending | |
 
-## What Is Done
-- CITADEL installed
-- Project hub created
+## Done
+<!-- Nothing yet -->
 
-## What Happens Next
-- Describe what you want to build
-- Answer the planning questions
-- Review the implementation plan
-- Build, review, then ship
+## Next
+- [ ] User describes what they want to build
+- [ ] C-Suite asks questions
+- [ ] Specs drafted after user answers
+`, 'utf-8');
 
-## Fast Modes
-- **Start:** clarify the product, constraints, and priorities
-- **Build:** implement an approved chunk safely
-- **Fix:** patch a bug without breaking something else
-- **Ship:** run final checks, deploy, and prepare rollback
-`, overwrite);
+  writeFileSync(join(d, 'CONTEXT_SNAPSHOT.md'), `# Context Snapshot
 
-  writeTextFile(join(d, HUB_FILES.context), `# CITADEL Context
+> This file is written at the end of each session. Read it first to resume.
 
 ## Last Updated
 Never — fresh project.
@@ -113,16 +92,19 @@ Never — fresh project.
 ## What We're Building
 <!-- Not defined yet -->
 
-## Current Focus
-Project just initialized. Waiting for the user to describe the product.
+## Key Decisions Made
+<!-- None yet -->
+
+## Where We Left Off
+Project just initialized. Waiting for user to describe what they want to build.
 
 ## Open Questions
 <!-- None yet -->
-`, overwrite);
+`, 'utf-8');
 
-  writeTextFile(join(d, HUB_FILES.sessionLog), `# CITADEL Session Log
+  writeFileSync(join(d, 'SESSION_LOG.md'), `# Session Log
 
-> Append-only. This is the readable history of what happened in the project.
+> Append-only. Every significant action is logged here.
 
 ---
 
@@ -130,35 +112,42 @@ Project just initialized. Waiting for the user to describe the product.
 - **Date:** ${new Date().toISOString().split('T')[0]}
 - **Agent:** ATLAS (Orchestrator)
 - **Action:** Project initialized with CITADEL
-- **Result:** Team, rules, skills, state, and project hub created
-
----
-`, overwrite);
-
-  writeTextFile(join(d, HUB_FILES.decisions), `# CITADEL Decisions
-
-> Architecture, product, and implementation decisions live here.
+- **Result:** 42 agents installed, specs templates created, vault ready
 
 ---
 
-<!-- New decisions will be appended here -->
-`, overwrite);
+<!-- New sessions are appended below -->
+`, 'utf-8');
 
-  writeTextFile(join(d, HUB_FILES.codebase), `# CITADEL Codebase
+  writeFileSync(join(d, 'DECISIONS.md'), `# Decisions Log
 
-> Human-readable map of the codebase, key patterns, and dependencies.
+> Every architecture, product, or tech decision is recorded here.
+> Format: Decision — Reason — Alternatives considered — Date — Agent
+
+---
+
+<!-- Decisions will be appended by C-Suite agents -->
+`, 'utf-8');
+
+  writeFileSync(join(d, 'CODE_INVENTORY.md'), `# Code Inventory
+
+> Map of all project files, what they do, and key patterns.
+> Updated by maker agents when code is written or modified.
 
 ## Files
-<!-- No code files mapped yet -->
+<!-- No code files yet -->
 
-## Patterns
-<!-- No patterns documented yet -->
+## Key Patterns
+<!-- No patterns established yet -->
 
 ## Dependencies
-<!-- No dependencies documented yet -->
-`, overwrite);
+<!-- No dependencies yet -->
+`, 'utf-8');
 
-  writeTextFile(join(d, HUB_FILES.architecture), `# CITADEL Architecture
+  writeFileSync(join(d, 'ARCHITECTURE.md'), `# Architecture
+
+> System design, tech stack decisions, and high-level structure.
+> Updated by LINUS (CTO) and CODD (Data Architect).
 
 ## Tech Stack
 <!-- Not decided yet -->
@@ -166,116 +155,93 @@ Project just initialized. Waiting for the user to describe the product.
 ## System Design
 <!-- Not decided yet -->
 
-## Critical Flows
+## Data Model Summary
 <!-- Not decided yet -->
 
-## Constraints
+## API Design
 <!-- Not decided yet -->
-`, overwrite);
-
-  writeTextFile(join(d, HUB_FILES.tokens), `# CITADEL Tokens
-
-## Session Budget
-- **Budget:** Light
-- **Limit:** 4,000 tokens
-- **Used:** 0 tokens
-- **Status:** Healthy
-
-## Session Metrics
-- **LLM calls:** 0
-- **Last response:** 0 tokens
-- **Peak response:** 0 tokens
-
-## Guidance
-- Stay light until the task clearly needs more context.
-- If usage spikes early, snapshot and start a smaller session.
-`, overwrite);
-
-  writeTextFile(join(d, HUB_FILES.runbook), `# CITADEL Runbook
-
-## Run
-<!-- How to run the project locally -->
-
-## Deploy
-<!-- How to ship safely -->
-
-## Rollback
-<!-- How to recover if release fails -->
-
-## Monitoring
-<!-- What to watch after deploy -->
-`, overwrite);
-
-  writeTextFile(join(d, HUB_FILES.changelog), `# CITADEL Changelog
-
-## Unreleased
-- Project initialized
-`, overwrite);
-
-  writeTextFile(join(d, HUB_FILES.handoff), `# CITADEL Handoff
-
-## What This Project Is
-<!-- Short project summary -->
-
-## Current State
-<!-- What is done and what is next -->
-
-## Critical Things Not To Break
-<!-- Add protected flows and invariants here -->
-
-## How To Continue
-<!-- Instructions for the next collaborator or next session -->
-`, overwrite);
+`, 'utf-8');
 }
 
-export function writeGettingStarted(projectPath: string, overwrite = true): void {
-  const d = join(projectPath, PROJECT_HUB_DIR);
-  mkdirSync(d, { recursive: true });
-  writeTextFile(join(d, HUB_FILES.gettingStarted), `# Getting Started with CITADEL
+function writeGettingStarted(pp: string): void {
+  writeFileSync(join(pp, '.citadel', 'GETTING_STARTED.md'), `# 🏰 Getting Started with CITADEL
 
 ## What just happened?
 
-\`npx citadel-ai init\` installed CITADEL into your project.
+\`npx citadel-ai init\` installed CITADEL into your project. Here's what it created:
 
-### Hidden engine
-- \`${INTERNAL_DIR}/agents/\` — full agent personas
-- \`${TEAMS_DIR}/\` — team files and delivery pods
-- \`${SKILLS_DIR}/\` — skills and rules
-- \`${STATE_DIR}/\` — internal runtime state
-- \`${GATES_DIR}/\` — gate tracking
+### Files your IDE reads automatically
+Your AI IDE picks these up without any action from you:
+- \`CLAUDE.md\` → Claude Code reads this on every message
+- \`GEMINI.md\` → Antigravity reads this on every message
+- \`.cursorrules\` → Cursor reads this on every message
+- \`.windsurfrules\` → Windsurf reads this on every message
 
-### Visible project hub
-- \`${PROJECT_HUB_DIR}/STATUS.md\`
-- \`${PROJECT_HUB_DIR}/CONTEXT.md\`
-- \`${PROJECT_HUB_DIR}/SESSION_LOG.md\`
-- \`${PROJECT_HUB_DIR}/DECISIONS.md\`
-- \`${PROJECT_HUB_DIR}/ARCHITECTURE.md\`
-- \`${PROJECT_HUB_DIR}/CODEBASE.md\`
-- \`${PROJECT_HUB_DIR}/TOKENS.md\`
-- \`${PROJECT_HUB_DIR}/RUNBOOK.md\`
-- \`${PROJECT_HUB_DIR}/CHANGELOG.md\`
-- \`${PROJECT_HUB_DIR}/HANDOFF.md\`
-- \`${PROJECT_SPECS_DIR}/\`
+These files contain the CITADEL rules: which agents exist, how they work together,
+when to ask questions vs when to build, and what standards to enforce.
+
+### Your project's knowledge base (.citadel/)
+- \`agents/\` — 42 agent personas with full personality, rules, and system prompts
+- \`teams/\` — Same agents grouped by team (loaded per phase to save tokens)
+- \`specs/\` — Templates for PRD, architecture, security, data model, growth
+- \`memory/\` — Session state, decisions, errors (persists across sessions)
+- \`gates/\` — Progress tracking for the 5 quality gates
+
+### Slash commands (Claude Code & Cursor)
+- \`/citadel-help\` — "What should I do next?"
+- \`/citadel-build\` — Start building with the maker team
+- \`/citadel-review\` — Run the checker team on your code
+- \`/citadel-security\` — Full security audit by BRUCE (CISO)
+- \`/citadel-status\` — See current phase and gate progress
 
 ## What to do now
 
-1. Open your project in Codex, Claude Code, Cursor, Antigravity, or Windsurf
-2. Describe what you want to build
-3. Let CITADEL clarify the scope and risks
-4. Review the implementation plan
-5. Choose the right mode: Start, Build, Fix, or Ship
+### Step 1: Open your project in your IDE
+Just open this folder in Claude Code, Cursor, Antigravity, or Windsurf.
+The AI already knows about CITADEL — no configuration needed.
 
-## If the AI goes off track
+### Step 2: Describe what you want to build
+Type something like:
+- "I want to build a meal planning app for people with food allergies"
+- "I need an internal dashboard to track team capacity"
+- "Build me a REST API for a marketplace"
 
-Tell it:
+### Step 3: Answer the C-Suite's questions
+The AI will convene the C-Suite — 5 strategic agents who each ask
+1-2 questions from their angle:
+- 🎯 MARTY (Product): Who is this for? What problem?
+- 🏗️ LINUS (Architecture): Tech preferences? Scale?
+- 🛡️ BRUCE (Security): User data? Auth needs?
+- 📈 SEAN (Growth): How will users find this?
+- 🗄️ MONICA (Data): What entities? Relationships?
 
-\`Follow CITADEL. Ask questions first, make a plan, protect what must not break, then build, review, and ship safely.\`
-`, overwrite);
+Answer their questions. They'll draft specs based on YOUR answers.
+
+### Step 4: Build
+The maker agents will build per domain — backend, frontend, mobile, etc.
+Each one follows strict code standards.
+
+### Step 5: Review
+Checker agents validate independently. The builder never reviews their own work.
+
+## Tips
+
+- Say "help" or "stuck" anytime — ATLAS will guide you
+- Say "@bruce" to talk directly to the security agent
+- Say "status" to see gate progress
+- Specs are saved in .citadel/specs/ — they persist across sessions
+- If the AI starts building without asking questions first, remind it:
+  "Follow CITADEL rules — ask questions before drafting"
+
+## Need help?
+https://github.com/nbabderrahmane/citadel-ai/issues
+`, 'utf-8');
 }
 
+// ═══ MAIN INIT ═══
 export async function initCommand(targetPath?: string): Promise<void> {
   const pp = targetPath ?? process.cwd();
-  const cp = join(pp, INTERNAL_DIR);
+  const cp = join(pp, '.citadel');
 
   console.log(banner());
 
@@ -286,87 +252,77 @@ export async function initCommand(targetPath?: string): Promise<void> {
 
   console.log('\n⏳ Installing CITADEL...\n');
 
-  for (const d of [
-    cp,
-    join(pp, STATE_DIR),
-    join(pp, GATES_DIR),
-    join(pp, AGENTS_DIR),
-    join(pp, TEAMS_DIR),
-    join(pp, SKILLS_DIR),
-    join(pp, PROJECT_HUB_DIR),
-    join(pp, PROJECT_SPECS_DIR),
-  ]) {
+  // Scaffold
+  for (const d of [cp, join(cp, 'memory'), join(cp, 'gates'), join(cp, 'specs'), join(cp, 'agents'), join(cp, 'teams'), join(cp, 'vault'), join(cp, 'skills')]) {
     mkdirSync(d, { recursive: true });
   }
 
+  // Config
   writeFileSync(join(cp, 'citadel.config.json'), JSON.stringify({
-    version: '11.0.0',
+    version: '10.3.0',
     features: { autoGates: true, persistentMemory: true, chineseWalls: true },
   }, null, 2), 'utf-8');
 
-  const memory = new Memory(pp);
-  memory.initSession();
+  // Init memory & gates
+  new Memory(pp).initSession();
   new GateSystem(pp).initAllGates();
 
+  // Content
   writeAgentPersonas(cp);
   writeTeamFiles(cp);
   writeSkills(cp);
-  writeSpecTemplates(pp);
-  writeProjectHubTemplates(pp);
+  writeSpecTemplates(cp);
+  writeVaultTemplates(cp);
   writeGettingStarted(pp);
-  memory.refreshProjectHub();
 
+  // IDE rules
   installAllIDEs(pp);
 
+  // .gitignore (vault is committed, memory/gates are not)
   const gi = join(pp, '.gitignore');
-  const requiredIgnores = ['.citadel/state/', '.citadel/gates/'];
+  const giContent = '\n# CITADEL state (vault + specs + agents are committed)\n.citadel/memory/\n.citadel/gates/\n';
   if (existsSync(gi)) {
-    const current = readFileSync(gi, 'utf-8');
-    const missing = requiredIgnores.filter(line => !current.includes(line));
-    if (missing.length) appendFileSync(gi, `\n# CITADEL internal state\n${missing.join('\n')}\n`);
+    if (!readFileSync(gi, 'utf-8').includes('.citadel/memory')) appendFileSync(gi, giContent);
   } else {
-    writeFileSync(gi, `# CITADEL internal state\n${requiredIgnores.join('\n')}\n`);
+    writeFileSync(gi, giContent);
   }
 
   const c = getAgentCount();
-  console.log(`  ✅ ${c.total} agents installed (${AGENTS_DIR}/)
-  ✅ ${TEAM_FILE_COUNT} team files for phased loading (${TEAMS_DIR}/)
-  ✅ ${SKILL_FILE_COUNT} skills files — engineering standards (${SKILLS_DIR}/)
-  ✅ Spec templates (${PROJECT_SPECS_DIR}/)
-  ✅ ${HUB_FILE_COUNT} visible project hub files (${PROJECT_HUB_DIR}/)
-  ✅ Internal state + gates (${STATE_DIR}/, ${GATES_DIR}/)
+  console.log(`  ✅ ${c.total} agents installed (.citadel/agents/)
+  ✅ 10 team files for phased loading (.citadel/teams/)
+  ✅ 7 skills files — engineering standards (.citadel/skills/)
+  ✅ Spec templates (.citadel/specs/)
+  ✅ Project vault — live memory (.citadel/vault/)
+  ✅ Getting started guide (.citadel/GETTING_STARTED.md)
 
   IDE rules (auto-loaded — no config needed):
-  ✅ AGENTS.md         → Codex
   ✅ CLAUDE.md         → Claude Code
   ✅ .cursorrules      → Cursor
   ✅ GEMINI.md         → Antigravity
   ✅ .windsurfrules    → Windsurf
 
   Slash commands:
-  ✅ /citadel-start    → clarify + plan before code
-  ✅ /citadel-help     → what to do next
-  ✅ /citadel-build    → build with planning + review
-  ✅ /citadel-fix      → hotfix + change-impact review
-  ✅ /citadel-review   → checker + CTO coherence review
-  ✅ /citadel-ship     → release readiness + rollback
-  ✅ /citadel-estimate → estimate context pressure before execution
-  ✅ /citadel-snapshot → save context + handoff
-  ✅ /citadel-security → security audit
-  ✅ /citadel-status   → phase + gate + token budget
+  ✅ /citadel-help     → "What do I do next?"
+  ✅ /citadel-build    → Start the maker team
+  ✅ /citadel-review   → Run the checker team
+  ✅ /citadel-security → Security audit
+  ✅ /citadel-status   → Phase & gate progress
 
 ${'═'.repeat(56)}
 
-  ✅ CITADEL is ready.
+  ✅ CITADEL is ready. Here's what to do:
 
-  1. Open this folder in your AI IDE
-  2. Start by describing what you want to build
-  3. Review the plan before any code
+  1. Open this folder in your IDE
+     (Claude Code, Cursor, Antigravity, or Windsurf)
 
-  Visible project hub:
-  📖 ${PROJECT_HUB_DIR}/${HUB_FILES.gettingStarted}
-  📌 ${PROJECT_HUB_DIR}/${HUB_FILES.status}
-  🧠 ${PROJECT_HUB_DIR}/${HUB_FILES.context}
-  🧮 ${PROJECT_HUB_DIR}/${HUB_FILES.tokens}
+  2. The AI already knows the rules — just start talking:
+     "I want to build [describe your idea]"
+
+  3. The C-Suite will ask you questions FIRST,
+     then draft specs based on your answers.
+
+  That's it. You talk, the team works.
+
+  📖 Full guide: .citadel/GETTING_STARTED.md
 `);
 }

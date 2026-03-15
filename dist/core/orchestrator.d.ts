@@ -15,13 +15,8 @@ export declare class Orchestrator {
     processMessage(userMessage: string): Promise<string>;
     advancePhase(): Promise<string>;
     private routeMessage;
-    private shouldUseCollaborativeResponse;
     private buildPrompt;
-    private processCollaborativeMessage;
-    private selectCollaborativePanel;
-    private buildCollaborativePrompt;
     private isHelpRequest;
-    private hasDirectAgentMention;
     private handleHelp;
     private formatResponse;
 }
